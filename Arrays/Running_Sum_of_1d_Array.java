@@ -16,3 +16,13 @@ class Solution {
         return ans;
     }
 }
+
+// Approach
+// Initialize a variable sum to store the cumulative total.
+// Traverse the array from left to right.
+// Add the current element to sum.
+// Store the updated sum in the result array at the same index.
+
+//  Complexity Analysis:-
+// Time Complexity: O(n) — single pass through the array
+// Space Complexity: O(n) — extra array to store results
