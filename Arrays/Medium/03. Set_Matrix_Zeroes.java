@@ -6,61 +6,90 @@
 // Solution In JAVA:-
 
 class Solution {
-    public void setZeroes(int[][] matrix) {
-        int m = matrix.length;
-        int n = matrix[0].length;
-        List<Integer> ii = new ArrayList<>();
-        List<Integer> jj = new ArrayList<>();
-        for(int i=0;i<n;i++){
-            for(int j=0;j<n;j++){
-                if(matrix[i][j] == 0){
-                    ii.add(i);
-                    jj.add(j);
+    public void setZeroes(int[][] arr) {
+        int r = arr.length;
+        int c = arr[0].length;
+        boolean firstRow = false;
+        boolean firstCol = false;
+        for(int i=0;i<c;i++){
+            if(arr[0][i] == 0){
+                firstRow = true;
+                break;
+            }
+        }
+        for(int i=0;i<r;i++){
+            if(arr[i][0] == 0){
+                firstCol = true;
+                break;
+            }
+        }
+        for (int i = 1; i < r; i++) {
+            for (int j = 1; j < c; j++) {
+                if (arr[i][j] == 0) {
+                    arr[i][0] = 0;
+                    arr[0][j] = 0;
                 }
             }
         }
-        for(int i=0;i<n;i++){
-            for(int j=0;j<n;j++){
-                if(i == list.get)
+        for (int i = 1; i < r; i++) {
+            for (int j = 1; j < c; j++) {
+                if (arr[i][0] == 0 || arr[0][j] == 0) {
+                    arr[i][j] = 0;
+                }
+            }
+        }
+        if (firstRow) {
+            for (int j = 0; j < c; j++) {
+                arr[0][j] = 0;
+            }
+        }
+        if (firstCol) {
+            for (int i = 0; i < r; i++) {
+                arr[i][0] = 0;
             }
         }
     }
 }
 
-// Approach (Using Extra Space):-
+// Approach (In-Place, Constant Space):-
 
-// The idea is to record the positions of all zeroes first, and then use that information to update the matrix.
-// Steps:
+// We use the first row and first column as markers to avoid using extra space.
+// Key Idea
+// If arr[i][j] == 0, then:
+// mark its row → arr[i][0] = 0
+// mark its column → arr[0][j] = 0
+// The first row and first column themselves need special handling, so we track them using two boolean variables.
 
-// Traverse the matrix.
-// Whenever a cell (i, j) contains 0, store:
-// row index i in a list rows
-// column index j in a list cols
-// Traverse the matrix again.
-// If the current cell’s row is in rows or its column is in cols, set it to 0.
-// This ensures that we don’t modify the matrix while we are still detecting zeroes.
+// Steps:-
+
+// Check first row
+// If any element in the first row is 0, set firstRow = true.
+// Check first column
+// If any element in the first column is 0, set firstCol = true.
+// Mark rows and columns
+// Traverse the matrix from (1,1) onward.
+// For any 0, mark its row and column using the first row/column.
+// Set zeroes using markers
+// Traverse again from (1,1).
+// If either the row marker or column marker is 0, set the cell to 0.
+// Handle first row and first column
+// If firstRow is true → set entire first row to 0
+// If firstCol is true → set entire first column to 0
 
 // Time Complexity:-
 
 // Let:
-// m = number of rows
-// n = number of columns
-// First traversal: O(m × n)
-// Second traversal: O(m × n)
-// O(m × n)
+// r = number of rows
+// c = number of columns
+// The matrix is traversed a constant number of times.
+
+// Time Complexity:-
+// O(r × c)
 
 // Space Complexity:-
 
-// We store row and column indices where zeroes occur.
-// In the worst case, all cells are zero:
-// rows list → up to m entries
-// cols list → up to n entries
-// O(m + n)
+// Only two boolean variables are used (firstRow, firstCol)
+// No extra arrays or data structures
 
-// Notes / Improvements:-
-
-// This solution is easy to understand but uses extra space.
-// The problem can be optimized to O(1) space by using the first row and first column as markers.
-// Be careful with loop bounds:
-// Use i < m for rows
-// Use j < n for columns
+// Space Complexity:-
+// O(1)
