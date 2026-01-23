@@ -23,4 +23,26 @@
     }
  }
 
+// Approach:-
 
+// The problem asks for the smallest missing positive integer from an unsorted array.
+// Since the smallest missing positive number must lie in the range [1, n+1] (where n is the array length), we use an auxiliary boolean array of size n + 1.
+
+// Iterate through the input array:-
+
+// For every number x such that 0 ≤ x ≤ n, mark arr[x] = true.
+// Then iterate from 1 to n:
+// The first index i where arr[i] is false is the missing positive number.
+// If all values from 1 to n are present, the answer is n + 1.
+// This approach trades extra space for simplicity and clarity.
+
+// Time Complexity:-
+
+// O(n)
+// One pass to mark the presence of elements
+// One pass to find the missing number
+
+// Space Complexity:-
+
+// O(n)
+// Extra boolean array of size n + 1
