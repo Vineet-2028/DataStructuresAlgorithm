@@ -6,7 +6,7 @@
 // Your solution must run in O(log n) time and O(1) space.
 
 // SOlution In JAVA:-
-
+  
 class Solution {
     public int singleNonDuplicate(int[] nums) {
         int n = nums.length;
